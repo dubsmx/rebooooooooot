@@ -4,7 +4,7 @@ import EventsPopular from "@/components/EventsPopular";
 import HowItWorks from "@/components/HowItWorks";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/Testimonials";
-import MidCta from "@/components/MidCta";
+import MidCta from "../components/MidCta";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 

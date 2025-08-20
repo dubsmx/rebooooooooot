@@ -23,7 +23,6 @@ export default function Navbar() {
           {/* Marca con logo y REBOOT en mayúsculas */}
           <a href="/" className="flex items-center gap-3">
             <Image src="/images/logo-reboot.svg" alt="Reboot logo" width={28} height={28} priority />
-            <span className="tracking-wider font-semibold uppercase">REBOOT</span>
           </a>
 
           {/* Navegación (desktop) */}
