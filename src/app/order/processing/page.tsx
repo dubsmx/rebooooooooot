@@ -1,5 +1,6 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -8,7 +9,7 @@ export default function ProcessingPage() {
   const r = useRouter();
   const orderId = sp.get("orderId") || "";
 
-  const [msg, setMsg] = useState("Confirming your payment…");
+  const [msg, setMsg] = useState("Confirming your paymentâ€¦");
   useEffect(() => {
     if (!orderId) return;
     let stop = false;
@@ -25,7 +26,7 @@ export default function ProcessingPage() {
           const status = data?.status;
           if (status === "paid") { r.replace(`/order/${orderId}`); return; }
           if (status === "failed") { r.replace(`/order/failed?reason=Payment%20failed`); return; }
-          setMsg(`Waiting… (${status || "pending"})`);
+          setMsg(`Waitingâ€¦ (${status || "pending"})`);
         } catch {}
         await new Promise((d) => setTimeout(d, 1000));
       }
