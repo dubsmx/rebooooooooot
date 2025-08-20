@@ -1,79 +1,83 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+const navItems = [
+  { href: "/#concerts", label: "Conciertos" },
+  { href: "/#sports", label: "Deportes" },
+  { href: "/#cities", label: "Ciudades" },
+  { href: "/sell", label: "Vender boletos" },
+  { href: "/support", label: "Soporte" },
+  { href: "/login", label: "Iniciar sesión" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const Item = ({ href, children }:{ href: string; children: React.ReactNode }) => (
-    <a
-      href={href}
-      className="block px-3 py-2 rounded-lg hover:bg-[#0b0b0b]"
-      onClick={() => setOpen(false)}
-    >
-      {children}
-    </a>
-  );
-
   return (
-    <header className="fixed top-4 inset-x-0 z-50">
-      <div className="mx-auto max-w-7xl px-4">
-        {/* Barra rectangular (no pÃƒÂ­ldora), bordes redondos, sin transparencia */}
-        <div className="h-16 rounded-xl bg-black border border-[#1A1A1A] shadow-[0_8px_30px_rgba(0,0,0,0.6)] px-3 md:px-4 flex items-center gap-4">
-          {/* Marca con logo y REBOOT en mayÃƒÂºsculas */}
-          <a href="/" className="flex items-center gap-3">
-  <span className="logo-mark w-7 h-7 md:w-8 md:h-8" aria-hidden="true"></span>
-</a>
+    <div className="fixed top-4 inset-x-0 z-50 flex justify-center">
+      <nav className="w-[95%] max-w-6xl h-14 rounded-2xl bg-black border border-[#222] px-3 md:px-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/logo-reboot.svg"
+            alt="REBOOT"
+            width={24}
+            height={24}
+            priority
+          />
+          <span className="font-semibold tracking-wide text-white">REBOOT</span>
+        </Link>
 
-          {/* NavegaciÃƒÂ³n (desktop) */}
-          <nav className="hidden md:flex flex-1 items-center justify-center">
-            <ul className="flex items-center gap-6 text-sm">
-              <li><a href="#conciertos">Conciertos</a></li>
-              <li><a href="#deportes">Deportes</a></li>
-              <li><a href="#ciudades">Ciudades</a></li>
-              <li><a href="#vender">Vender boletos</a></li>
-              <li><a href="#soporte">Soporte</a></li>
-            </ul>
-          </nav>
-
-          {/* CTA (desktop) */}
-          <div className="hidden md:block ml-auto">
-            <a href="#signup" className="btn btn-primary nav-cta">Crea tu cuenta</a>
-          </div>
-
-          {/* Hamburguesa (mÃƒÂ³vil) */}
-          <button
-            aria-label="Abrir menÃƒÂº"
-            aria-controls="mobile-menu"
-            aria-expanded={open}
-            onClick={() => setOpen(v => !v)}
-            className="md:hidden ml-auto size-10 grid place-items-center rounded-lg border border-[#1A1A1A]"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" role="img">
-              <rect x="3" y="6" width="18" height="2" rx="1"></rect>
-              <rect x="3" y="11" width="18" height="2" rx="1"></rect>
-              <rect x="3" y="16" width="18" height="2" rx="1"></rect>
-            </svg>
-          </button>
+        {/* Desktop menu */}
+        <div className="hidden md:flex items-center gap-6">
+          {navItems.map((i) => (
+            <Link key={i.href} href={i.href} className="text-sm text-[#E5E5E5] hover:text-white transition-colors">
+              {i.label}
+            </Link>
+          ))}
         </div>
 
-        {/* MenÃƒÂº mÃƒÂ³vil (links + CTA) */}
-        {open && (
-          <div id="mobile-menu" className="mt-2 rounded-xl bg-black border border-[#1A1A1A] overflow-hidden md:hidden">
-            <div className="px-2 py-2 text-sm">
-              <Item href="#conciertos">Conciertos</Item>
-              <Item href="#deportes">Deportes</Item>
-              <Item href="#ciudades">Ciudades</Item>
-              <Item href="#vender">Vender boletos</Item>
-              <Item href="#soporte">Soporte</Item>
-              <Item href="#login">Iniciar sesiÃƒÂ³n</Item>
-              <div className="px-2 py-2">
-                <a href="#signup" className="btn btn-primary w-full">Crea tu cuenta</a>
-              </div>
-            </div>
+        {/* CTA */}
+        <div className="hidden md:block">
+          <Link href="/signup" className="btn btn-primary">Crea tu cuenta</Link>
+        </div>
+
+        {/* Hamburger */}
+        <button
+          aria-label="Abrir menú"
+          onClick={() => setOpen((v) => !v)}
+          className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl border border-[#333] text-white"
+        >
+          <span className="sr-only">Menu</span>
+          <div className="space-y-1.5">
+            <div className="w-5 h-0.5 bg-white"></div>
+            <div className="w-5 h-0.5 bg-white"></div>
+            <div className="w-5 h-0.5 bg-white"></div>
           </div>
-        )}
-      </div>
-    </header>
+        </button>
+      </nav>
+
+      {/* Mobile sheet */}
+      {open && (
+        <div className="md:hidden absolute top-20 w-[95%] max-w-6xl rounded-2xl bg-black border border-[#222] p-4">
+          <div className="flex flex-col gap-3">
+            {navItems.map((i) => (
+              <Link
+                key={i.href}
+                href={i.href}
+                onClick={() => setOpen(false)}
+                className="py-2 text-[#E5E5E5] hover:text-white"
+              >
+                {i.label}
+              </Link>
+            ))}
+            <Link href="/signup" onClick={() => setOpen(false)} className="btn btn-primary w-full">
+              Crea tu cuenta
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

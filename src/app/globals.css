@@ -2,155 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema negro sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³lido */
-:root, html, body { height: 100%; background:#000; color:#fff; }
-* { box-sizing: border-box; }
-.text-muted { color:#E5E5E5; }
+/* Base negro sólido y tipografía */
+:root { color-scheme: dark; }
+html, body { background:#000; }
+body { color:#fff; }
 
-.btn { display:inline-flex; align-items:center; justify-content:center; border-radius:12px; padding:.625rem 1rem; font-weight:600; }
-.btn-primary { background:#fff; color:#000; border:1px solid #fff; }
-.btn-primary:hover { background:#E5E5E5; }
-.btn-secondary { background:transparent; color:#fff; border:1px solid #fff; }
-.btn-secondary:hover { background:#fff; color:#000; }
+/* Contenedor secciones */
+.section { max-width: 1200px; margin: 0 auto; }
 
-.input-black { background:#000; color:#fff; border:1px solid #fff; border-radius:12px; padding:.75rem 1rem; outline:none; }
-.input-black::placeholder { color:#E5E5E5; }
-
-.card { background:#000; border:1px solid #1A1A1A; border-radius:16px; }
-.section { background:#000; }
-a { color:#fff; text-decoration:none; }
-a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
-   Requiere /public/images/logo-reboot.svg
-   Por defecto: BLANCO. En hover: gradiente arcoÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ris animado. */
-.logo-mark{
-  display:inline-block;
-  background:#ffffff;                 /* estado normal: blanco */
-  -webkit-mask: url('/images/logo-reboot.svg') center/contain no-repeat;
-          mask: url('/images/logo-reboot.svg') center/contain no-repeat;
-  transition: background-position .2s linear, background-color .2s linear;
-}
-.logo-mark:hover{
-  background-image: linear-gradient(90deg,
-    #ff004c, #ff7a00, #ffd400, #3cff00, #00e1ff, #5a00ff, #ff00d0, #ff004c);
-  background-size: 200% 100%;
-  animation: rbShift 1.8s linear infinite;
-}
-@keyframes rbShift{
-  from { background-position: 0% 0; }
-  to   { background-position: 100% 0; }
+/* Botones */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition;
+  }
+  .btn-primary {
+    @apply bg-white text-black;
+  }
+  .btn-primary:hover {
+    background: #e5e5e5;
+  }
+  .btn-secondary {
+    @apply border border-white text-white;
+    background: #000; /* sin transparencia */
+  }
+  .btn-secondary:hover {
+    background: #111;
+  }
 }
 
-/* === Rainbow system v3 === */
-:root{
-  /* paleta arcoÃƒÆ’Ã‚Â­ris (puedes ajustar tonos aquÃƒÆ’Ã‚Â­) */
-  --rb-colors: #ff004c, #ff7a00, #ffd400, #38ff62, #00e1ff, #5a00ff, #ff00d0, #ff004c;
+/* Inputs */
+input[type="text"], input[type="search"] {
+  @apply bg-black border border-[#222] text-white rounded-2xl px-4 py-3 outline-none;
 }
+input[type="text"]::placeholder,
+input[type="search"]::placeholder { color:#BFBFBF; }
 
-/* animaciÃƒÆ’Ã‚Â³n suave de desplazamiento horizontal (ida y vuelta) */
-@keyframes rbShiftSoft{
-  0%   { background-position:   0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position:   0% 50%; }
-}
+/* Headings */
+h1,h2,h3,h4 { @apply text-white font-extrabold; }
 
-/* ---------- Logo solo en hover (blanco por defecto) ---------- */
-.logo-mark{
-  display:inline-block;
-  background:#ffffff; /* estado normal */
-  -webkit-mask: url('/images/logo-reboot.svg') center/contain no-repeat;
-          mask: url('/images/logo-reboot.svg') center/contain no-repeat;
-  transition: background-color .25s ease, background-position .25s ease, filter .25s ease;
-}
-.logo-mark:hover{
-  background-image: linear-gradient(90deg, var(--rb-colors));
-  background-size: 250% 250%;
-  animation: rbShiftSoft 6s ease-in-out infinite;
-  /* desvanecido sutil: un pelÃƒÆ’Ã‚Â­n de brillo */
-  filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
-}
-
-/* ---------- CTA de la navbar: hover arcoÃƒÆ’Ã‚Â­ris sutil e infinito ---------- */
-.nav-cta{
-  position:relative;
-  overflow:hidden;
-}
-.nav-cta::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius:inherit;
-  background-image: linear-gradient(90deg, var(--rb-colors));
-  background-size: 260% 260%;
-  opacity:0;                          /* invisible normalmente */
-  transition: opacity .25s ease;      /* desvanecido suave */
-  z-index:0;
-}
-.nav-cta:hover::before{
-  opacity:1;                          /* aparece al hover */
-  animation: rbShiftSoft 7.5s ease-in-out infinite;
-}
-.nav-cta > * { position:relative; z-index:1; } /* texto por encima */
-
-/* ---------- HERO: imagen + overlay arcoÃƒÆ’Ã‚Â­ris sutil ----------
-   Guarda tu imagen en /public/images/hero.jpg (la que me mandaste).
-   Dibujamos un "cinturÃƒÆ’Ã‚Â³n" de color detrÃƒÆ’Ã‚Â¡s del primer bloque del home. */
-#hero-root{ position:relative; }
-#hero-root::before{
-  content:"";
-  position:absolute; left:0; right:0; top:0;
-  height: 520px;                      /* alto del hero; ajusta si quieres */
-  background: #000 url('/images/hero.jpg') center/cover no-repeat;
-  opacity:.28;                        /* sutil */
-  pointer-events: none;
-  z-index: -1;
-}
-#hero-root::after{
-  content:"";
-  position:absolute; left:0; right:0; top:0;
-  height: 520px;
-  background-image: linear-gradient(90deg, var(--rb-colors));
-  background-size: 300% 300%;
-  opacity:.18;                        /* desvanecido muy suave */
-  animation: rbShiftSoft 14s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-/* === fix nav-cta text visibility (hover) === */
-.nav-cta{
-  position:relative;
-  isolation:isolate;           /* crea stacking context */
-  color:#000 !important;       /* texto negro siempre (btn primario) */
-}
-.nav-cta::before{
-  z-index:-1;                  /* gradiente detrÃƒÂ¡s del contenido */
-}
-.nav-cta:hover{ color:#000 !important; }
-.nav-cta > *{ position:relative; z-index:1; }
-
-/* === fix nav-cta text visibility (robusto) === */
-.nav-cta{
-  position: relative;
-  z-index: 0;                 /* nuevo stacking context */
-  background: #fff !important;
-  color: #000 !important;
-  overflow: hidden;
-  isolation: isolate;
-}
-.nav-cta::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius: inherit;
-  background-image: linear-gradient(90deg, var(--rb-colors, #ff004c,#ff7a00,#ffd400,#38ff62,#00e1ff,#5a00ff,#ff00d0,#ff004c));
-  background-size: 260% 260%;
-  opacity: 0;
-  transition: opacity .25s ease;
-  z-index: 0;                 /* DETRÃS del contenido, por encima del fondo blanco */
-}
-.nav-cta:hover::before{
-  opacity: 1;
-  animation: rbShiftSoft 7.5s ease-in-out infinite;
-}
-.nav-cta > *{
-  position: relative;
-  z-index: 1;                 /* texto SIEMPRE arriba */
-  color: #000 !important;
-}
+/* --- Importantísimo: eliminar cualquier clase/animación arcoíris previa --- */
+/* (si existía) */
+.rainbow, .rainbow-text { all: unset; }
