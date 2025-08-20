@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head><meta charSet="utf-8" /></head>
-      <body className={`${inter.className} min-h-dvh font-sans antialiased bg-black text-white`}>
+      <body className={`${inter.className} min-h-dvh antialiased bg-black text-white`}>
         {children}
       </body>
     </html>
