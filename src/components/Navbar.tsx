@@ -18,14 +18,15 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4">
-        {/* Barra rectangular (no píldora), bordes redondos, sin transparencia */}
+        {/* Barra rectangular (no pÃƒÂ­ldora), bordes redondos, sin transparencia */}
         <div className="h-16 rounded-xl bg-black border border-[#1A1A1A] shadow-[0_8px_30px_rgba(0,0,0,0.6)] px-3 md:px-4 flex items-center gap-4">
-          {/* Marca con logo y REBOOT en mayúsculas */}
+          {/* Marca con logo y REBOOT en mayÃƒÂºsculas */}
           <a href="/" className="flex items-center gap-3">
-            <Image src="/images/logo-reboot.svg" alt="Reboot logo" width={28} height={28} priority />
-          </a>
+  <span className="logo-mark w-7 h-7 md:w-8 md:h-8" aria-hidden="true"></span>
+  <span className="tracking-wider font-semibold uppercase">REBOOT</span>
+</a>
 
-          {/* Navegación (desktop) */}
+          {/* NavegaciÃƒÂ³n (desktop) */}
           <nav className="hidden md:flex flex-1 items-center justify-center">
             <ul className="flex items-center gap-6 text-sm">
               <li><a href="#conciertos">Conciertos</a></li>
@@ -33,18 +34,17 @@ export default function Navbar() {
               <li><a href="#ciudades">Ciudades</a></li>
               <li><a href="#vender">Vender boletos</a></li>
               <li><a href="#soporte">Soporte</a></li>
-              <li><a href="#login">Iniciar sesión</a></li>
             </ul>
           </nav>
 
           {/* CTA (desktop) */}
           <div className="hidden md:block ml-auto">
-            <a href="#signup" className="btn btn-primary">Crea tu cuenta</a>
+            <a href="#signup" className="btn btn-primary nav-cta">Crea tu cuenta</a>
           </div>
 
-          {/* Hamburguesa (móvil) */}
+          {/* Hamburguesa (mÃƒÂ³vil) */}
           <button
-            aria-label="Abrir menú"
+            aria-label="Abrir menÃƒÂº"
             aria-controls="mobile-menu"
             aria-expanded={open}
             onClick={() => setOpen(v => !v)}
@@ -58,7 +58,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Menú móvil (links + CTA) */}
+        {/* MenÃƒÂº mÃƒÂ³vil (links + CTA) */}
         {open && (
           <div id="mobile-menu" className="mt-2 rounded-xl bg-black border border-[#1A1A1A] overflow-hidden md:hidden">
             <div className="px-2 py-2 text-sm">
@@ -67,7 +67,7 @@ export default function Navbar() {
               <Item href="#ciudades">Ciudades</Item>
               <Item href="#vender">Vender boletos</Item>
               <Item href="#soporte">Soporte</Item>
-              <Item href="#login">Iniciar sesión</Item>
+              <Item href="#login">Iniciar sesiÃƒÂ³n</Item>
               <div className="px-2 py-2">
                 <a href="#signup" className="btn btn-primary w-full">Crea tu cuenta</a>
               </div>

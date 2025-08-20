@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main className="pt-16">
+      <main id="hero-root" className="pt-16">
         <Hero />
         <section id="conciertos" className="section"></section>
         <section id="deportes" className="section"></section>

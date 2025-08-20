@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema negro sólido */
+/* Tema negro sÃ³lido */
 :root, html, body { height: 100%; background:#000; color:#fff; }
 * { box-sizing: border-box; }
 .text-muted { color:#E5E5E5; }
@@ -19,4 +19,98 @@
 .card { background:#000; border:1px solid #1A1A1A; border-radius:16px; }
 .section { background:#000; }
 a { color:#fff; text-decoration:none; }
-a:hover { opacity:.9; }
+a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
+   Requiere /public/images/logo-reboot.svg
+   Por defecto: BLANCO. En hover: gradiente arcoÃ­ris animado. */
+.logo-mark{
+  display:inline-block;
+  background:#ffffff;                 /* estado normal: blanco */
+  -webkit-mask: url('/images/logo-reboot.svg') center/contain no-repeat;
+          mask: url('/images/logo-reboot.svg') center/contain no-repeat;
+  transition: background-position .2s linear, background-color .2s linear;
+}
+.logo-mark:hover{
+  background-image: linear-gradient(90deg,
+    #ff004c, #ff7a00, #ffd400, #3cff00, #00e1ff, #5a00ff, #ff00d0, #ff004c);
+  background-size: 200% 100%;
+  animation: rbShift 1.8s linear infinite;
+}
+@keyframes rbShift{
+  from { background-position: 0% 0; }
+  to   { background-position: 100% 0; }
+}
+
+/* === Rainbow system v3 === */
+:root{
+  /* paleta arcoíris (puedes ajustar tonos aquí) */
+  --rb-colors: #ff004c, #ff7a00, #ffd400, #38ff62, #00e1ff, #5a00ff, #ff00d0, #ff004c;
+}
+
+/* animación suave de desplazamiento horizontal (ida y vuelta) */
+@keyframes rbShiftSoft{
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+
+/* ---------- Logo solo en hover (blanco por defecto) ---------- */
+.logo-mark{
+  display:inline-block;
+  background:#ffffff; /* estado normal */
+  -webkit-mask: url('/images/logo-reboot.svg') center/contain no-repeat;
+          mask: url('/images/logo-reboot.svg') center/contain no-repeat;
+  transition: background-color .25s ease, background-position .25s ease, filter .25s ease;
+}
+.logo-mark:hover{
+  background-image: linear-gradient(90deg, var(--rb-colors));
+  background-size: 250% 250%;
+  animation: rbShiftSoft 6s ease-in-out infinite;
+  /* desvanecido sutil: un pelín de brillo */
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
+}
+
+/* ---------- CTA de la navbar: hover arcoíris sutil e infinito ---------- */
+.nav-cta{
+  position:relative;
+  overflow:hidden;
+}
+.nav-cta::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  background-image: linear-gradient(90deg, var(--rb-colors));
+  background-size: 260% 260%;
+  opacity:0;                          /* invisible normalmente */
+  transition: opacity .25s ease;      /* desvanecido suave */
+  z-index:0;
+}
+.nav-cta:hover::before{
+  opacity:1;                          /* aparece al hover */
+  animation: rbShiftSoft 7.5s ease-in-out infinite;
+}
+.nav-cta > * { position:relative; z-index:1; } /* texto por encima */
+
+/* ---------- HERO: imagen + overlay arcoíris sutil ----------
+   Guarda tu imagen en /public/images/hero.jpg (la que me mandaste).
+   Dibujamos un "cinturón" de color detrás del primer bloque del home. */
+#hero-root{ position:relative; }
+#hero-root::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0;
+  height: 520px;                      /* alto del hero; ajusta si quieres */
+  background: #000 url('/images/hero.jpg') center/cover no-repeat;
+  opacity:.28;                        /* sutil */
+  pointer-events: none;
+  z-index: -1;
+}
+#hero-root::after{
+  content:"";
+  position:absolute; left:0; right:0; top:0;
+  height: 520px;
+  background-image: linear-gradient(90deg, var(--rb-colors));
+  background-size: 300% 300%;
+  opacity:.18;                        /* desvanecido muy suave */
+  animation: rbShiftSoft 14s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
