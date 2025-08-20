@@ -11,5 +11,4 @@ export function getStripe(): Stripe {
   return _stripe;
 }
 
-// Compat: algunas partes del código esperan "stripe" directamente
 export const stripe = getStripe();
