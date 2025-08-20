@@ -1,0 +1,23 @@
+import "./globals.css";
+import type { Metadata } from "next";
+import Providers from "@/components/Providers";
+import Header from "@/components/Header";
+
+export const metadata: Metadata = {
+  title: "Boletera",
+  description: "Buy and sell verified tickets between fans."
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head><meta charSet="utf-8" /></head>
+      <body>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
+}

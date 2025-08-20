@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Fondo negro sólido en TODA la app */
+:root, html, body { height: 100%; background:#000000; color:#FFFFFF; }
+* { box-sizing: border-box; }
+
+/* Texto */
+.text-muted { color:#E5E5E5; }
+
+/* Botones (solo blanco sólido o borde blanco) */
+.btn { display:inline-flex; align-items:center; justify-content:center; border-radius:12px; padding:.625rem 1rem; font-weight:600; }
+.btn-primary { background:#FFFFFF; color:#000000; border:1px solid #FFFFFF; }
+.btn-primary:hover { background:#E5E5E5; }
+.btn-secondary { background:transparent; color:#FFFFFF; border:1px solid #FFFFFF; }
+.btn-secondary:hover { background:#FFFFFF; color:#000000; }
+
+/* Inputs/Selects siempre negros con borde blanco */
+.input-black { background:#000000; color:#FFFFFF; border:1px solid #FFFFFF; border-radius:12px; padding:.75rem 1rem; outline:none; }
+.input-black::placeholder { color:#E5E5E5; }
+
+/* Tarjetas y secciones: sin fondos claros, solo borde para separar */
+.card   { background:#000000; border:1px solid #1A1A1A; border-radius:16px; }
+.section{ background:#000000; }
+
+/* Links */
+a { color:#FFFFFF; text-decoration:none; }
+a:hover { opacity:.9; }

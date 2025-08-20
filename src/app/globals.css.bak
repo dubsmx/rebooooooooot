@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Solid dark theme */
+:root { color-scheme: dark; }
+html, body { background:#000; }
+body { @apply text-zinc-100 antialiased; }
+* { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+
+/* Quita brillo hasta que el header aplique clase "is-scrolled" */
+.nav-shell { box-shadow: none; }
+.nav-shell.is-scrolled {
+  /* brillo sutil blanco/gris alrededor del navbar */
+  box-shadow: 0 0 22px rgba(255,255,255,0.08);
+}
