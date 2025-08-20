@@ -1,10 +1,12 @@
+import { Suspense } from "react";
+export const dynamic = "force-dynamic";
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import Navbar from "@/components/Navbar";
 
-export default function CheckoutPage() {
+export default function CheckoutPage() {\n  return (\n    <Suspense fallback={<div className="section px-4 py-10">Cargando…</div>}>\n      (<></>)\n    </Suspense>\n  );\n}\n\n// TODO: mueve tu contenido real dentro del Suspense si aún no estaba
   const search = useSearchParams();
   const priceId = search.get("priceId") || "";
   const qty = Number(search.get("qty") || "1");
