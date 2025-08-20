@@ -1,5 +1,6 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 import { useCallback, useEffect, useState } from "react";
 import TicketUpload from "@/components/TicketUpload";
 
@@ -71,7 +72,7 @@ export default function SellPage() {
           {events.map((e: any) => (
             <label key={e.id} className="flex items-center gap-2 px-3 py-2 border-b">
               <input type="radio" name="event" onChange={() => setEventId(e.id)} checked={eventId === e.id}/>
-              <span className="text-sm">{e.title} — {e.city}, {e.country}</span>
+              <span className="text-sm">{e.title} â€” {e.city}, {e.country}</span>
             </label>
           ))}
         </div>

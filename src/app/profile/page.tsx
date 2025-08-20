@@ -1,9 +1,10 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 import { useEffect, useState } from "react";
 
 function cleanMojibake(s: string) {
-  try { if (!/[ÃÂÐ]/.test(s)) return s; const bytes = new TextEncoder().encode(s); return new TextDecoder("latin1").decode(bytes); }
+  try { if (!/[ÃƒÃ‚Ã]/.test(s)) return s; const bytes = new TextEncoder().encode(s); return new TextDecoder("latin1").decode(bytes); }
   catch { return s; }
 }
 
@@ -48,7 +49,7 @@ export default function ProfilePage() {
     if (!res.ok) alert(await res.text()); else alert("Saved");
   }
 
-  if (!p) return <div className="mx-auto max-w-3xl px-4 py-8">Loading…</div>;
+  if (!p) return <div className="mx-auto max-w-3xl px-4 py-8">Loadingâ€¦</div>;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 space-y-4">
@@ -65,7 +66,7 @@ export default function ProfilePage() {
           <input type="file" accept="image/*" onChange={(e) => setAvatarFile(e.target.files?.[0] ?? null)} />
         </div>
       </div>
-      <button onClick={save} disabled={saving} className="border rounded px-3 py-2">{saving ? "Saving…" : "Save"}</button>
+      <button onClick={save} disabled={saving} className="border rounded px-3 py-2">{saving ? "Savingâ€¦" : "Save"}</button>
     </div>
   );
 }
