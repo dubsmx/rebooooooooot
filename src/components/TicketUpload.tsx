@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import JSZip from "jszip";
-import { BrowserMultiFormatReader, DecodeHintType, BarcodeFormat } from "@zxing/browser";
+import { BrowserMultiFormatReader, BarcodeFormat } from "@zxing/browser";
 
 type Verified = { storagePath: string; qrMessage: string; fileType: "pdf" | "pkpass" };
 

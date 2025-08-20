@@ -1,24 +1,22 @@
-import admin from "firebase-admin";
+import { getApps, initializeApp, cert, App, getApp } from "firebase-admin/app";
+import { getFirestore, FieldValue as _FieldValue } from "firebase-admin/firestore";
 
 const projectId   = process.env.FIREBASE_PROJECT_ID;
 const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-let privateKey    = process.env.FIREBASE_PRIVATE_KEY;
+const privateKey  = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
 
-// En variables de entorno, las nuevas líneas suelen venir como \n
-if (privateKey) privateKey = privateKey.replace(/\\n/g, "\n");
+export const hasAdmin = Boolean(projectId && clientEmail && privateKey);
 
-if (!projectId || !clientEmail || !privateKey) {
-  console.warn("[firebaseAdmin] Variables de entorno faltantes: FIREBASE_PROJECT_ID / FIREBASE_CLIENT_EMAIL / FIREBASE_PRIVATE_KEY");
-}
+export const admin: App | undefined = (() => {
+  if (getApps().length) return getApp();
+  if (hasAdmin) {
+    return initializeApp({
+      credential: cert({ projectId: projectId!, clientEmail: clientEmail!, privateKey: privateKey! }),
+    });
+  }
+  // sin credenciales: devolvemos undefined (el código que use admin/db debe manejar este caso en runtime)
+  return undefined;
+})();
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId,
-      clientEmail,
-      privateKey,
-    } as admin.ServiceAccount),
-  });
-}
-
-export default admin;
+export const db = admin ? getFirestore(admin) : ({} as any);
+export const FieldValue = _FieldValue;

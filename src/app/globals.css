@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema negro sÃ³lido */
+/* Tema negro sÃƒÂ³lido */
 :root, html, body { height: 100%; background:#000; color:#fff; }
 * { box-sizing: border-box; }
 .text-muted { color:#E5E5E5; }
@@ -21,7 +21,7 @@
 a { color:#fff; text-decoration:none; }
 a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
    Requiere /public/images/logo-reboot.svg
-   Por defecto: BLANCO. En hover: gradiente arcoÃ­ris animado. */
+   Por defecto: BLANCO. En hover: gradiente arcoÃƒÂ­ris animado. */
 .logo-mark{
   display:inline-block;
   background:#ffffff;                 /* estado normal: blanco */
@@ -42,11 +42,11 @@ a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
 
 /* === Rainbow system v3 === */
 :root{
-  /* paleta arcoíris (puedes ajustar tonos aquí) */
+  /* paleta arcoÃ­ris (puedes ajustar tonos aquÃ­) */
   --rb-colors: #ff004c, #ff7a00, #ffd400, #38ff62, #00e1ff, #5a00ff, #ff00d0, #ff004c;
 }
 
-/* animación suave de desplazamiento horizontal (ida y vuelta) */
+/* animaciÃ³n suave de desplazamiento horizontal (ida y vuelta) */
 @keyframes rbShiftSoft{
   0%   { background-position:   0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -65,11 +65,11 @@ a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
   background-image: linear-gradient(90deg, var(--rb-colors));
   background-size: 250% 250%;
   animation: rbShiftSoft 6s ease-in-out infinite;
-  /* desvanecido sutil: un pelín de brillo */
+  /* desvanecido sutil: un pelÃ­n de brillo */
   filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
 }
 
-/* ---------- CTA de la navbar: hover arcoíris sutil e infinito ---------- */
+/* ---------- CTA de la navbar: hover arcoÃ­ris sutil e infinito ---------- */
 .nav-cta{
   position:relative;
   overflow:hidden;
@@ -90,9 +90,9 @@ a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
 }
 .nav-cta > * { position:relative; z-index:1; } /* texto por encima */
 
-/* ---------- HERO: imagen + overlay arcoíris sutil ----------
+/* ---------- HERO: imagen + overlay arcoÃ­ris sutil ----------
    Guarda tu imagen en /public/images/hero.jpg (la que me mandaste).
-   Dibujamos un "cinturón" de color detrás del primer bloque del home. */
+   Dibujamos un "cinturÃ³n" de color detrÃ¡s del primer bloque del home. */
 #hero-root{ position:relative; }
 #hero-root::before{
   content:"";
@@ -114,3 +114,14 @@ a:hover { opacity:.9; }/* === Logo rainbow on hover (solo el logo) ===
   pointer-events: none;
   z-index: -1;
 }
+/* === fix nav-cta text visibility (hover) === */
+.nav-cta{
+  position:relative;
+  isolation:isolate;           /* crea stacking context */
+  color:#000 !important;       /* texto negro siempre (btn primario) */
+}
+.nav-cta::before{
+  z-index:-1;                  /* gradiente detrás del contenido */
+}
+.nav-cta:hover{ color:#000 !important; }
+.nav-cta > *{ position:relative; z-index:1; }

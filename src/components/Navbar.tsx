@@ -23,7 +23,6 @@ export default function Navbar() {
           {/* Marca con logo y REBOOT en mayÃƒÂºsculas */}
           <a href="/" className="flex items-center gap-3">
   <span className="logo-mark w-7 h-7 md:w-8 md:h-8" aria-hidden="true"></span>
-  <span className="tracking-wider font-semibold uppercase">REBOOT</span>
 </a>
 
           {/* NavegaciÃƒÂ³n (desktop) */}
