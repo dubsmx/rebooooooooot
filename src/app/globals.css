@@ -2,44 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base negro sólido y tipografía */
 :root { color-scheme: dark; }
 html, body { background:#000; }
 body { color:#fff; }
 
-/* Contenedor secciones */
 .section { max-width: 1200px; margin: 0 auto; }
 
-/* Botones */
 @layer components {
-  .btn {
-    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition;
-  }
-  .btn-primary {
-    @apply bg-white text-black;
-  }
-  .btn-primary:hover {
-    background: #e5e5e5;
-  }
-  .btn-secondary {
-    @apply border border-white text-white;
-    background: #000; /* sin transparencia */
-  }
-  .btn-secondary:hover {
-    background: #111;
-  }
+  .btn { @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition; }
+  .btn-primary { @apply bg-white text-black; }
+  .btn-primary:hover { background:#e5e5e5; }
+  .btn-secondary { @apply border border-white text-white; background:#000; }
+  .btn-secondary:hover { background:#111; }
 }
 
-/* Inputs */
 input[type="text"], input[type="search"] {
   @apply bg-black border border-[#222] text-white rounded-2xl px-4 py-3 outline-none;
 }
-input[type="text"]::placeholder,
-input[type="search"]::placeholder { color:#BFBFBF; }
+input::placeholder { color:#BFBFBF; }
 
-/* Headings */
-h1,h2,h3,h4 { @apply text-white font-extrabold; }
-
-/* --- Importantísimo: eliminar cualquier clase/animación arcoíris previa --- */
-/* (si existía) */
-.rainbow, .rainbow-text { all: unset; }
+/* Hard-kill de clases anteriores de arcoiris si existían */
+.rainbow, .rainbow-text, .rainbow-border { all: unset; }

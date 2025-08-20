@@ -1,16 +1,9 @@
-"use client";
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import ProcessingClient from "@/components/order/ProcessingClient";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-function ProcessingClient() {
-  const p = useSearchParams();
-  const r = p.get("ref");
-  return <p className="text-[#E5E5E5]">Procesando tu orden{r ? ` (${r})` : ""}…</p>;
-}
 
 export default function ProcessingPage() {
   return (
