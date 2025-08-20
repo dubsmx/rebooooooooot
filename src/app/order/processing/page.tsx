@@ -1,44 +1,30 @@
 "use client";
 
-export const dynamic = 'force-dynamic';
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function ProcessingPage() {
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+function ProcessingClient() {
   const sp = useSearchParams();
-  const r = useRouter();
-  const orderId = sp.get("orderId") || "";
-
-  const [msg, setMsg] = useState("Confirming your paymentâ€¦");
-  useEffect(() => {
-    if (!orderId) return;
-    let stop = false;
-    (async () => {
-      // poll up to ~20s
-      for (let i = 0; i < 20 && !stop; i++) {
-        try {
-          const res = await fetch("/api/stripe/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ orderId }),
-          });
-          const data = await res.json();
-          const status = data?.status;
-          if (status === "paid") { r.replace(`/order/${orderId}`); return; }
-          if (status === "failed") { r.replace(`/order/failed?reason=Payment%20failed`); return; }
-          setMsg(`Waitingâ€¦ (${status || "pending"})`);
-        } catch {}
-        await new Promise((d) => setTimeout(d, 1000));
-      }
-      r.replace(`/order/${orderId}`);
-    })();
-    return () => { stop = true; };
-  }, [orderId, r]);
+  const orderId = sp.get("orderId") || sp.get("order_id") || sp.get("id") || sp.get("session_id") || "";
 
   return (
-    <div className="container max-w-md mx-auto p-6 text-center">
-      <h1 className="text-xl font-semibold mb-2">Processing</h1>
-      <p className="opacity-70">{msg}</p>
+    <div className="section px-4 py-12">
+      <h1 className="text-2xl font-semibold mb-2">Procesando tu orden</h1>
+      <p className="text-muted">
+        {orderId ? `ID: ${orderId}` : "Un momento, por favor…"}
+      </p>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="section px-4 py-12">Procesando…</div>}>
+      <ProcessingClient />
+    </Suspense>
   );
 }
