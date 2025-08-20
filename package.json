@@ -1,26 +1,30 @@
-{
-  "name": "boletera",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint || echo \"skip\""
-  },
-  "dependencies": {
-    "@stripe/stripe-js": "^7.8.0",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "stripe": "^18.4.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
-    "@types/node": "latest",
-    "@types/react": "19.1.10",
-    "autoprefixer": "^10.4.20",
-    "tailwindcss": "^4.0.0",
-    "typescript": "latest"
-  }
+﻿{
+    "name":  "boletera",
+    "version":  "0.1.0",
+    "private":  true,
+    "scripts":  {
+                    "dev":  "next dev",
+                    "build":  "next build",
+                    "start":  "next start",
+                    "lint":  "next lint || echo \"skip\""
+                },
+    "dependencies":  {
+                         "@stripe/stripe-js":  "2.6.0",
+                         "next":  "latest",
+                         "react":  "latest",
+                         "react-dom":  "latest",
+                         "stripe":  "^18.4.0",
+                         "@stripe/react-stripe-js":  "2.6.2",
+                         "jszip":  "3.10.1",
+                         "@zxing/browser":  "0.1.4",
+                         "pdfjs-dist":  "4.7.76"
+                     },
+    "devDependencies":  {
+                            "@types/node":  "latest",
+                            "@types/react":  "19.1.10",
+                            "autoprefixer":  "10.4.19",
+                            "tailwindcss":  "3.4.13",
+                            "typescript":  "latest",
+                            "postcss":  "8.4.41"
+                        }
 }
